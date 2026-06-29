@@ -15,11 +15,11 @@ class APIClient:
             response.raise_for_status()
             return response.json()
         except requests.exceptions.Timeout: 
-            print("Servidor no responde")
-        except requests.exceptions.HTTPError: 
-            print("Error 404 o 500")
+            print("Timeout : Servidor no respondió en 3 segundos")
+        except requests.exceptions.HTTPError as e: 
+            print(f"Error HTTP {response.status_code} : {e}")
         except requests.exceptions.RequestException: 
-            print("Cualquier otro error dentro de red")
+            print(f"Error de red: {e}")
 
 
 
