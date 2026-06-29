@@ -8,7 +8,10 @@ class APIClient:
     def get(self,endpoint):
         try:
             url = self.base_url + endpoint
-            response = requests.get(url, timeout = 3)
+            response = requests.get(
+                url,
+                headers = {"Authorization": f"Bearer {self.token}"},
+                timeout = 3)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.Timeout: 
